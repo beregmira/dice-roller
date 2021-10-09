@@ -30,7 +30,7 @@ class Dice(private val numSide: Int, var context: Context) {
     }
 
     private fun getRandomDice(): Int {
-        val diceRandom = DefaultSecureRandomService.getInstance().nextInt(numSide)
+        val diceRandom = DefaultSecureRandomService.getInstance().nextInt(numSide + 1)
         println(diceRandom.toString())
         return if (diceRandom != 0) {
             diceRandom
