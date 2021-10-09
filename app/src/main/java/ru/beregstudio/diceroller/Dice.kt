@@ -2,9 +2,10 @@ package ru.beregstudio.diceroller
 
 import android.content.Context
 import android.widget.ImageView
+import com.atlassian.security.random.DefaultSecureRandomService
 
 class Dice(private val numSide: Int, var context: Context) {
-    var diceRoll = (1..numSide).random()
+    var diceRoll = getRandomDice()
     var image = ImageView(context)
 
     private fun getDiceRandomImage(): Int {
@@ -28,7 +29,11 @@ class Dice(private val numSide: Int, var context: Context) {
         image.layoutParams.width = 350
     }
 
-    fun rollDice() {
-        diceRoll = (1..numSide).random()
+    private fun getRandomDice(): Int {
+        val diceRandom = DefaultSecureRandomService.getInstance().nextInt(numSide)
+        println(diceRandom.toString())
+        return if (diceRandom != 0) {
+            diceRandom
+        } else 1
     }
 }

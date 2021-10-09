@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 sum += dice.diceRoll
                 rollNumber.text = sum.toString()
                 println(dice.diceRoll.toString())
+//                println(dice.getRandomDice())
             }
             println("Stop debug")
             diceRun.clear()
