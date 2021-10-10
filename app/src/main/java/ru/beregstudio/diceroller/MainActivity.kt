@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 
 //        seekBarText.text = (seekDice.progress+1).toString() + " dice"
 
-        var diceRun = arrayListOf<Dice>()
+        val diceRun = arrayListOf<Dice>()
 
         //Отрисовка кубика
         fun roller(numOfDice: Int) {
-            var sum: Int = 0
+            var sum = 0
             for (i in 1..numOfDice) {
                 diceRun.add(getDice())
             }
