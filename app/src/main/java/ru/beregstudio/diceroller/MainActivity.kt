@@ -66,9 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     //Получение нового кубика
     private fun getDice(): Dice {
-        val dice = Dice(SIX_SIDES, this)
-        dice.setDiceImage()
-        return dice
+        return Dice(SIX_SIDES, this)
     }
 
 }
