@@ -4,9 +4,9 @@ import android.content.Context
 import android.widget.ImageView
 import com.atlassian.security.random.DefaultSecureRandomService
 
-class Dice(private val numSide: Int, var context: Context) {
+class Dice(private val numSide: Int, context_param: Context) {
     var diceRoll = getRandomDice()
-    var image = ImageView(context)
+    var image = ImageView(context_param)
 
     private fun getDiceRandomImage(): Int {
         return when (diceRoll) {
@@ -19,7 +19,11 @@ class Dice(private val numSide: Int, var context: Context) {
         }
     }
 
-    fun setDiceImage() {
+    init {
+        setDiceImage()
+    }
+
+    private fun setDiceImage() {
         image.setImageResource(getDiceRandomImage())
         image.contentDescription = diceRoll.toString()
     }
