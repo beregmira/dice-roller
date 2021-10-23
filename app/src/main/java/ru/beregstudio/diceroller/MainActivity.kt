@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 println(dice.diceRoll.toString())
             }
             println("Stop debug")
-            getDiceRollSound()
+            getDiceRollSound().start()
             diceRun.clear()
         }
         roller(DEFAULT_NUMBER_OF_DICE)
@@ -66,12 +66,9 @@ class MainActivity : AppCompatActivity() {
         return Dice(SIX_SIDES, this)
     }
 
-    private fun getDiceRollSound(){
+    private fun getDiceRollSound(): MediaPlayer{
         val diceSound: MediaPlayer = MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
         diceSound.isLooping = false
-        diceSound.start()
+        return diceSound
     }
-
-
-
 }
