@@ -2,6 +2,7 @@ package ru.beregstudio.diceroller
 
 import android.content.Context
 import android.widget.ImageView
+import org.apache.commons.rng.simple.RandomSource
 
 
 class Dice(private val numSide: Int, context_param: Context) {
@@ -34,11 +35,8 @@ class Dice(private val numSide: Int, context_param: Context) {
     }
 
     private fun getRandomDice(): Int {
-//        val diceRandom = DefaultSecureRandomService.getInstance().nextInt(numSide + 1)
-//        println(diceRandom.toString())
-//        return if (diceRandom != 0) {
-//            diceRandom
-//        } else 1
-        return 1
+        val diceRandom = RandomSource.MT_64.create().nextInt(numSide)
+        println(diceRandom.toString())
+        return 1 + diceRandom
     }
 }
