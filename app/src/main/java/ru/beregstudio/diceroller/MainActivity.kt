@@ -1,5 +1,7 @@
 package ru.beregstudio.diceroller
 
+import android.content.res.AssetManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 println(dice.diceRoll.toString())
             }
             println("Stop debug")
+            getDiceRollSound()
             diceRun.clear()
         }
         roller(DEFAULT_NUMBER_OF_DICE)
@@ -62,5 +65,13 @@ class MainActivity : AppCompatActivity() {
     private fun getDice(): Dice {
         return Dice(SIX_SIDES, this)
     }
+
+    private fun getDiceRollSound(){
+        val diceSound: MediaPlayer = MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
+        diceSound.isLooping = false
+        diceSound.start()
+    }
+
+
 
 }
