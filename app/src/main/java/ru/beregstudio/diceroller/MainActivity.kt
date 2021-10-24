@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity() {
                 rollNumber.text = sum.toString()
                 println(dice.diceRoll.toString())
             }
-            println("Stop debug")
             getDiceRollSound().start()
+            getDiceRollSound().release()
             diceRun.clear()
+            println("Stop debug")
+
         }
         roller(DEFAULT_NUMBER_OF_DICE)
 
