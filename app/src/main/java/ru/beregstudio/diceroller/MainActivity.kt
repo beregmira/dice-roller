@@ -2,7 +2,10 @@ package ru.beregstudio.diceroller
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 // Константы
