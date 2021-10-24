@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity() {
                 rollNumber.text = sum.toString()
                 println(dice.diceRoll.toString())
             }
-            println("Stop debug")
             getDiceRollSound().start()
+            getDiceRollSound().release()
             diceRun.clear()
+            println("Stop debug")
+
         }
         roller(DEFAULT_NUMBER_OF_DICE)
 
@@ -66,7 +68,13 @@ class MainActivity : AppCompatActivity() {
         return Dice(SIX_SIDES, this)
     }
 
-    private fun getDiceRollSound(): MediaPlayer{
+    /**
+     * Проигрывание звука броска кубика
+     *
+     * Функция возвращает объект [MediaPlayer] с отключенным лупингом и зазанным треком.
+     * @return [MediaPlayer]
+     */
+    private fun getDiceRollSound(): MediaPlayer {
         val diceSound: MediaPlayer = MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
         diceSound.isLooping = false
         return diceSound
