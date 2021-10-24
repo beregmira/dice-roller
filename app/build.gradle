@@ -11,11 +11,10 @@ android {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 9
-        versionName '1.9'
+        versionCode 10
+        versionName '1.10'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionNameSuffix 'fix'
     }
 
     buildTypes {
