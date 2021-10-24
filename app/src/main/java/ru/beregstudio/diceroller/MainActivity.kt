@@ -71,7 +71,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Проигрывание звука броска кубика
      *
-     * Функция возвращает объект @return [MediaPlayer] с отключенным лупингом и зазанным треком.
+     * Функция возвращает объект [MediaPlayer] с отключенным лупингом и зазанным треком.
+     * @return [MediaPlayer]
      */
     private fun getDiceRollSound(): MediaPlayer {
         val diceSound: MediaPlayer = MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
