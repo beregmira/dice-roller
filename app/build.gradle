@@ -9,12 +9,13 @@ android {
 
     defaultConfig {
         applicationId "ru.beregstudio.diceroller"
-        minSdkVersion 19
+        minSdkVersion 22
         targetSdkVersion 30
-        versionCode 8
-        versionName '1.8'
+        versionCode 9
+        versionName '1.9'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionNameSuffix 'fix'
     }
 
     buildTypes {
