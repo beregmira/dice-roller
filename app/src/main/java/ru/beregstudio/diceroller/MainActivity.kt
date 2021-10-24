@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
 
 // Константы
