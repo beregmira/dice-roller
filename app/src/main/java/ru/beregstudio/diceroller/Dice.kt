@@ -36,7 +36,6 @@ class Dice(private val numSide: Int, context_param: Context) {
 
     private fun getRandomDice(): Int {
         val diceRandom = RandomSource.MT_64.create().nextInt(numSide)
-        println(diceRandom.toString())
         return 1 + diceRandom
     }
 }

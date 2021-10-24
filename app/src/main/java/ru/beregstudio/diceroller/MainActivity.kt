@@ -1,6 +1,5 @@
 package ru.beregstudio.diceroller
 
-import android.content.res.AssetManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.*
@@ -19,33 +18,13 @@ class MainActivity : AppCompatActivity() {
         val rollNumber: TextView = findViewById(R.id.diceNumber)
         val rollButton: Button = findViewById(R.id.diceButton)
         val seekDice: SeekBar = findViewById(R.id.seekBar)
-        val diceRun = arrayListOf<Dice>()
 
-        // Отрисовка кубика
-        fun roller(numOfDice: Int) {
-            var sum = 0
-            for (i in 1..numOfDice) {
-                diceRun.add(getDice())
-            }
-            println("Start debug")
-            for (dice in diceRun) {
-                layout.addView(dice.image)
-                dice.setDiceSize()
-                rollNumber.text = dice.diceRoll.toString()
-                sum += dice.diceRoll
-                rollNumber.text = sum.toString()
-                println(dice.diceRoll.toString())
-            }
-            println("Stop debug")
-            getDiceRollSound().start()
-            diceRun.clear()
-        }
-        roller(DEFAULT_NUMBER_OF_DICE)
+        roller(DEFAULT_NUMBER_OF_DICE, layout, rollNumber)
 
         // Клик по кнопке "ROLL"
         rollButton.setOnClickListener {
             layout.removeAllViews()
-            roller(seekDice.progress + 1)
+            roller(seekDice.progress + 1, layout, rollNumber)
         }
 
         // Событие изменения количества кубиков
@@ -53,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 layout.removeAllViews()
-                roller(seekBar.progress + 1)
+                roller(seekBar.progress + 1, layout, rollNumber)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -61,14 +40,40 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // Отрисовка кубика
+    private fun roller(numOfDice: Int, layout: LinearLayout, rollNumber: TextView) {
+        val diceRun = arrayListOf<Dice>()
+        var sum = 0
+        for (i in 1..numOfDice) {
+            diceRun.add(getDice())
+        }
+        println("Start debug")
+        for (dice in diceRun) {
+            layout.addView(dice.image)
+            dice.setDiceSize()
+            rollNumber.text = dice.diceRoll.toString()
+            sum += dice.diceRoll
+            rollNumber.text = sum.toString()
+            println(dice.diceRoll.toString())
+        }
+        getDiceRollSound().start()
+        diceRun.clear()
+        println("Stop debug")
+
+    }
+
     // Получение нового кубика
     private fun getDice(): Dice {
         return Dice(SIX_SIDES, this)
     }
 
-    private fun getDiceRollSound(): MediaPlayer{
-        val diceSound: MediaPlayer = MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
-        diceSound.isLooping = false
-        return diceSound
+    /**
+     * Проигрывание звука броска кубика
+     *
+     * Функция возвращает объект [MediaPlayer] c заданным треком.
+     * @return [MediaPlayer]
+     */
+    private fun getDiceRollSound(): MediaPlayer {
+        return MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
     }
 }
