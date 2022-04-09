@@ -22,23 +22,17 @@ class MainActivity : AppCompatActivity() {
 
         roller(DEFAULT_NUMBER_OF_DICE, layout, rollNumber)
 
-        // Клик по кнопке "ROLL"
-        /**
-         * Событие нажатия на кнопку броска  кубиков
-         *
-         * Обновляет основной экран вывода
-         */
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roller(seekDice.progress + 1, layout, rollNumber)
         }
         seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            /**
-             * Событие изменения количества кубиков
-             *
-             * Использование переключателя для выбора количества кубиков пользователем от 1 до 3
-             * @param seekBar
-             */
+        /**
+         * Событие изменения количества кубиков
+         *
+         * Использование переключателя для выбора количества кубиков пользователем от 1 до 3
+         * @param seekBar
+         */
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 layout.removeAllViews()
                 roller(seekBar.progress + 1, layout, rollNumber)
