@@ -8,11 +8,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-// Константы
-const val SIX_SIDES: Int = 6 // Количество граней одного кубика
+const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
 
-// Основной экран Activity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +23,22 @@ class MainActivity : AppCompatActivity() {
         roller(DEFAULT_NUMBER_OF_DICE, layout, rollNumber)
 
         // Клик по кнопке "ROLL"
+        /**
+         * Событие нажатия на кнопку броска  кубиков
+         *
+         * Обновляет основной экран вывода
+         */
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roller(seekDice.progress + 1, layout, rollNumber)
         }
-
-        // Событие изменения количества кубиков
         seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
+            /**
+             * Событие изменения количества кубиков
+             *
+             * Использование переключателя для выбора количества кубиков пользователем от 1 до 3
+             * @param seekBar
+             */
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 layout.removeAllViews()
                 roller(seekBar.progress + 1, layout, rollNumber)
@@ -43,7 +49,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    // Отрисовка кубика
+    /**
+     * Отрисовка кубика на экране
+     *
+     * Функция принимает атрибуты количество кубиков [numOfDice], лейаут [layout] и подпись [rollNumber]
+     * @param layout
+     * @param numOfDice
+     * @param rollNumber
+     */
     private fun roller(numOfDice: Int, layout: LinearLayout, rollNumber: TextView) {
         val diceRun = arrayListOf<Dice>()
         var sum = 0
@@ -65,7 +78,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Получение нового кубика
+    /**
+     * Получение нового кубика
+     *
+     * Функция возвращает объект [Dice] c присвоенным колличеством сторон.
+     * @return [Dice]
+     */
     private fun getDice(): Dice {
         return Dice(SIX_SIDES, this)
     }
