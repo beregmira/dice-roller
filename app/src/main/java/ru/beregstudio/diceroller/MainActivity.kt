@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roller(seekDice.progress + 1, layout, rollNumber)
-            Toast.makeText(this, "Click!", Toast.LENGTH_SHORT).show()
         }
         seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             /**
