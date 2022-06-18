@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
+const val DEFAULT_DICESET: Int = 1
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
      * @return [Dice]
      */
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, this)
+        return Dice(SIX_SIDES, DEFAULT_DICESET, this)
     }
 
     /**
