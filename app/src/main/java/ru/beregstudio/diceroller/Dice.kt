@@ -11,12 +11,12 @@ class Dice(private val numSide: Int, context_param: Context) {
 
     private fun getDiceRandomImage(): Int {
         return when (diceRoll) {
-            1 -> R.drawable.dice_1
-            2 -> R.drawable.dice_2
-            3 -> R.drawable.dice_3
-            4 -> R.drawable.dice_4
-            5 -> R.drawable.dice_5
-            else -> R.drawable.dice_6
+            1 -> R.drawable.set_1_dice_1
+            2 -> R.drawable.set_1_dice_2
+            3 -> R.drawable.set_1_dice_3
+            4 -> R.drawable.set_1_dice_4
+            5 -> R.drawable.set_1_dice_5
+            else -> R.drawable.set_1_dice_6
         }
     }
 

@@ -2,10 +2,7 @@ package ru.beregstudio.diceroller
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.SeekBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 const val SIX_SIDES: Int = 6
@@ -25,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roller(seekDice.progress + 1, layout, rollNumber)
+            Toast.makeText(this, "Click!", Toast.LENGTH_SHORT).show()
         }
         seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             /**
