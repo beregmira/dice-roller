@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Бросьте кубик</string>
     <string name="roll">Бросок</string>
+    <string name="redtheme">Красные</string>
+    <string name="greentheme">Зеленые</string>
 </resources>
