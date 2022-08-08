@@ -2,14 +2,14 @@ package ru.beregstudio.diceroller
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.SeekBar
-import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
+var diceset = 1
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +41,20 @@ class MainActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater.inflate(R.menu.main, menu)
+        println(inflater.toString())
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        diceset = when (item.itemId) {
+            R.id.red -> 1
+            else -> 2
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
@@ -79,7 +93,7 @@ class MainActivity : AppCompatActivity() {
      * @return [Dice]
      */
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, this)
+        return Dice(SIX_SIDES, diceset, this)
     }
 
     /**
@@ -91,4 +105,5 @@ class MainActivity : AppCompatActivity() {
     private fun getDiceRollSound(): MediaPlayer {
         return MediaPlayer.create(this, R.raw.igralnaya_kost_upala)
     }
+
 }
