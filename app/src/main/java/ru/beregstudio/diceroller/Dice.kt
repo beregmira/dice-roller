@@ -5,9 +5,9 @@ import android.widget.ImageView
 import kotlin.random.Random
 
 
-class Dice(private val numSide: Int, private val diceset: Int, context_param: Context) {
+class Dice(private val numSide: Int, private val diceset: Int, contextParam: Context) {
     var diceRoll = getRandomDice()
-    var image = ImageView(context_param)
+    var image = ImageView(contextParam)
 
     private fun getDiceSetOneRandomImage(): Int = when (diceRoll) {
         1 -> R.drawable.set_1_dice_1
