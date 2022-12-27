@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lancer le dé</string>
+    <string name="roll">" Lance"</string>
+    <string name="redtheme">Rouges</string>
+    <string name="greentheme">Verts</string>
+</resources>

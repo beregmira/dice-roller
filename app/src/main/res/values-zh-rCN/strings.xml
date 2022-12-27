@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">掷骰子</string>
+    <string name="roll">投</string>
+    <string name="redtheme">红色</string>
+    <string name="greentheme">绿色</string>
+</resources>

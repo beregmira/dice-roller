@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             layout.removeAllViews()
             roller(seekDice.progress + 1, layout, rollNumber)
         }
-        seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        seekDice.setOnSeekBarChangeListener(/* l = */ object : SeekBar.OnSeekBarChangeListener {
             /**
              * Событие изменения количества кубиков
              *
@@ -37,9 +37,28 @@ class MainActivity : AppCompatActivity() {
                 layout.removeAllViews()
                 roller(seekBar.progress + 1, layout, rollNumber)
             }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+            /**
+             * Событие воспроизведение трека при старте
+             *
+             * Является обязательным для класса, но имплементация не требуется
+             * @param seekBar
+             */
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                /**
+                 * Событие не применяется
+                 */
+            }
+            /**
+             * Событие при остановки воспроизведения
+             *
+             * Является обязательным для класса, но имплементация не требуется
+             * @param seekBar
+             */
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                /**
+                 * Событие не применяется
+                 */
+            }
         })
     }
 
