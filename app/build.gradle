@@ -6,7 +6,11 @@ plugins {
 android {
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
-
+    bundle {
+        storeArchive {
+            enable = false
+        }
+    }
     defaultConfig {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
