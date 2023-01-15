@@ -98,6 +98,9 @@ class MainActivity : AppCompatActivity() {
             sum += dice.diceRoll
             rollNumber.text = sum.toString()
             println(dice.diceRoll.toString())
+            println("Image size:")
+            println(dice.image.layoutParams.width.toString())
+            println("Image size end")
         }
         getDiceRollSound().start()
         diceRun.clear()
@@ -112,7 +115,7 @@ class MainActivity : AppCompatActivity() {
      * @return [Dice]
      */
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, diceset, this)
+        return Dice(SIX_SIDES, diceset, this, this.findViewById(R.id.DiceLayout))
     }
 
     /**

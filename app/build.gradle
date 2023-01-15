@@ -15,8 +15,8 @@ android {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
         targetSdkVersion 33
-        versionCode 17
-        versionName '1.17'
+        versionCode 18
+        versionName '1.18'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,7 +31,7 @@ android {
             minifyEnabled true
             shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable false
+            debuggable true
         }
     }
     compileOptions {
