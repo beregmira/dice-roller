@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
      * @return [Dice]
      */
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, diceset, this, this.findViewById(R.id.DiceLayout))
+        return Dice(SIX_SIDES, diceset, this)
     }
 
     /**
