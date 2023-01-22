@@ -1,4 +1,4 @@
 package ru.beregstudio.diceroller
 
-class Roll {
+class Roll(private val dice: Dice) {
 }

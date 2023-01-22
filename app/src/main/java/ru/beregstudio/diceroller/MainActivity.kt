@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
         println("Start debug")
         for (dice in diceRun) {
             layout.addView(dice.image)
-            dice.setDiceSize()
             rollNumber.text = dice.diceRoll.toString()
             sum += dice.diceRoll
             rollNumber.text = sum.toString()
