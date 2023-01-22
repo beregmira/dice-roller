@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
             rollNumber.text = sum.toString()
             println(dice.diceRoll.toString())
             println("Image size:")
+            dice.setDiceSize()
             println(dice.image.layoutParams.width.toString())
             println("Image size end")
         }
