@@ -11,6 +11,8 @@ class Roll(private val layout: LinearLayout, private val rollNumber: TextView,
     fun roller(numOfDice: Int) {
         val diceRun = arrayListOf<Dice>()
         var sum = 0
+        val play = getDiceRollSound()
+        play.start()
         for (i in 1..numOfDice) {
             diceRun.add(getDice())
         }
@@ -26,7 +28,10 @@ class Roll(private val layout: LinearLayout, private val rollNumber: TextView,
             println(dice.image.layoutParams.width.toString())
             println("Image size end")
         }
-        getDiceRollSound().start()
+        play.setOnCompletionListener {
+            play.reset()
+            play.release()
+        }
         diceRun.clear()
         println("Stop debug")
 
