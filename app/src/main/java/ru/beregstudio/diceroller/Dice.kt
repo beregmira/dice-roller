@@ -2,15 +2,12 @@ package ru.beregstudio.diceroller
 
 import android.content.Context
 import android.widget.ImageView
-import android.widget.LinearLayout
 import kotlin.random.Random
 
 
-class Dice(private val numSide: Int, private val diceset: Int, contextParam: Context, DiceLayout: LinearLayout) {
+class Dice(private val numSide: Int, private val diceset: Int, contextParam: Context) {
     var diceRoll = getRandomDice()
     var image = ImageView(contextParam)
-    val DiceLayoutHeight = DiceLayout.height
-    val DiceLayoutWidth = DiceLayout.width
 
     private fun getDiceSetOneRandomImage(): Int = when (diceRoll) {
         1 -> R.drawable.set_1_dice_1
@@ -46,7 +43,7 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
     }
 
     fun setDiceSize() {
-        image.layoutParams.width = 250
+        image.layoutParams.width = 350
     }
 
     private fun getRandomDice(): Int {
