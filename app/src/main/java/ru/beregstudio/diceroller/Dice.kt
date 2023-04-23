@@ -32,14 +32,11 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
     }
 
     private fun setDiceImage() {
-        if (diceset == 1) {
-            image.setImageResource(getDiceSetOneRandomImage())
+        when (diceset) {
+            1 -> image.setImageResource(getDiceSetOneRandomImage())
+            else -> image.setImageResource(getDiceSetTwoRandomImage())
         }
-        if (diceset == 2){
-            image.setImageResource(getDiceSetTwoRandomImage())
-        }
-
-            image.contentDescription = diceRoll.toString()
+        image.contentDescription = diceRoll.toString()
     }
 
     fun setDiceSize() {

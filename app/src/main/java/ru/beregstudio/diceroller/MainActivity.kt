@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val seekDice: SeekBar = findViewById(R.id.seekBar)
         val roll = Roll(layout, rollNumber, this)
         roll.roller(DEFAULT_NUMBER_OF_DICE)
-
+        
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roll.roller(seekDice.progress + 1)
