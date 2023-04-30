@@ -44,7 +44,6 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
     }
 
     private fun getRandomDice(): Int {
-        val diceRandom = Random.nextInt(numSide)
-        return 1 + diceRandom
+        return Random.nextInt(numSide) + 1
     }
 }
