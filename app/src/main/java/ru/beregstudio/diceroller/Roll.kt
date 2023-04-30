@@ -17,7 +17,6 @@ class Roll(
         for (i in 1..numOfDice) {
             diceRun.add(getDice())
         }
-        println("Start debug")
         for (dice in diceRun) {
             layout.addView(dice.image)
             rollNumber.text = dice.diceRoll.toString()
