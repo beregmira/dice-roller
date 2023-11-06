@@ -65,13 +65,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
+    /**
+     * Событие при создании основного меню
+     *
+     * Является обязательным при добавлении основного бокового меню в приложении
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater.inflate(R.menu.main, menu)
         println(inflater.toString())
         return super.onCreateOptionsMenu(menu)
     }
-
+    /**
+     * Событие при выборе элемента основного бокового меню
+     *
+     * При выборе скина кубиков фиксируем значение в глобальной переменной diceset
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         diceset = when (item.itemId) {
             R.id.red -> 1
