@@ -5,8 +5,6 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
     bundle {
         storeArchive {
             enable = false
@@ -15,9 +13,9 @@ android {
     defaultConfig {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
-        targetSdkVersion 33
-        versionCode 19
-        versionName '1.19'
+        targetSdkVersion 34
+        versionCode 21
+        versionName '1.21'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,13 +41,14 @@ android {
         jvmTarget = '1.8'
     }
     namespace 'ru.beregstudio.diceroller'
+    compileSdk 34
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
