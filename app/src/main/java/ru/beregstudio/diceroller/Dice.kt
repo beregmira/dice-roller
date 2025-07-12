@@ -27,6 +27,15 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
         else -> R.drawable.set_2_dice_6
     }
 
+    private fun getDiceSetThreeRandomImage(): Int = when (diceRoll) {
+        1 -> R.drawable.set_3_dice_1
+        2 -> R.drawable.set_3_dice_2
+        3 -> R.drawable.set_3_dice_3
+        4 -> R.drawable.set_3_dice_4
+        5 -> R.drawable.set_3_dice_5
+        else -> R.drawable.set_3_dice_6
+    }
+
     init {
         setDiceImage()
     }
@@ -34,7 +43,8 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
     private fun setDiceImage() {
         when (diceset) {
             1 -> image.setImageResource(getDiceSetOneRandomImage())
-            else -> image.setImageResource(getDiceSetTwoRandomImage())
+            2 -> image.setImageResource(getDiceSetTwoRandomImage())
+            else -> image.setImageResource(getDiceSetThreeRandomImage())
         }
         image.contentDescription = diceRoll.toString()
     }

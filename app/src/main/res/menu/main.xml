@@ -3,9 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/red"
+        android:icon="@drawable/set_1_dice_1"
         android:title="@string/redtheme"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/green"
+        android:icon="@drawable/set_2_dice_1"
         android:title="@string/greentheme" />
+    <item
+        android:id="@+id/dark"
+        android:icon="@drawable/set_3_dice_1"
+        android:title="@string/darktheme" />
 </menu>

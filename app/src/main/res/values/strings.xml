@@ -3,4 +3,5 @@
     <string name="roll">Roll</string>
     <string name="redtheme">Red</string>
     <string name="greentheme">Green</string>
+    <string name="darktheme">Dark</string>
 </resources>
