@@ -83,7 +83,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         diceset = when (item.itemId) {
             R.id.red -> 1
-            else -> 2
+            R.id.green -> 2
+            else -> 3
         }
         return super.onOptionsItemSelected(item)
     }

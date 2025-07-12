@@ -4,4 +4,5 @@
     <string name="roll">Бросок</string>
     <string name="redtheme">Красные</string>
     <string name="greentheme">Зеленые</string>
+    <string name="darktheme">Темные</string>
 </resources>
