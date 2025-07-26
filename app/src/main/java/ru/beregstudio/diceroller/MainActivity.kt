@@ -31,11 +31,6 @@ class MainActivity : AppCompatActivity() {
             layout.removeAllViews()
             roll.roller(seekDice.progress + 1)
         }
-
-        shakeDetector = ShakeDetector(this) {
-            layout.removeAllViews()
-            roll.roller(seekDice.progress + 1)
-        }
         seekDice.setOnSeekBarChangeListener(/* l = */ object : SeekBar.OnSeekBarChangeListener {
             /**
              * Событие изменения количества кубиков
@@ -72,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                  */
             }
         })
+        shakeDetector = ShakeDetector(this) {
+            layout.removeAllViews()
+            roll.roller(seekDice.progress + 1)
+        }
     }
     override fun onResume() {
         super.onResume()
