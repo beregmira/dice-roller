@@ -30,7 +30,6 @@ class Roll(
 
             val duration = (300..600).random().toLong()
             val endRotation = (360..720).random().toFloat()
-//            val startDelay = (0..1).random().toLong()
 
             ObjectAnimator.ofFloat(dice.image, "rotation", 0f, endRotation).apply {
                 this.duration = duration
