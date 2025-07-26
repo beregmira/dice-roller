@@ -57,7 +57,7 @@ class Roll(
     }
 
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, diceset, contextParam)
+        return Dice(SIX_SIDES, diceSet, contextParam)
     }
 
     /**

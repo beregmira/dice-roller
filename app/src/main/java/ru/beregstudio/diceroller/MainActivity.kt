@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
-var diceset = 1
+var diceSet = 1
 
 class MainActivity : AppCompatActivity() {
     private lateinit var roll: Roll
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
      * При выборе скина кубиков фиксируем значение в глобальной переменной diceset
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        diceset = when (item.itemId) {
+        diceSet = when (item.itemId) {
             R.id.red -> 1
             R.id.green -> 2
             else -> 3
