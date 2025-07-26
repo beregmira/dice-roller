@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private val rollNumber: TextView by lazy { findViewById(R.id.diceNumber) }
     private val rollButton: Button by lazy { findViewById(R.id.diceButton) }
     private val seekDice: SeekBar by lazy { findViewById(R.id.seekBar) }
+
+    private lateinit var shakeDetector: ShakeDetector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,6 +28,11 @@ class MainActivity : AppCompatActivity() {
         roll.roller(DEFAULT_NUMBER_OF_DICE)
         
         rollButton.setOnClickListener {
+            layout.removeAllViews()
+            roll.roller(seekDice.progress + 1)
+        }
+
+        shakeDetector = ShakeDetector(this) {
             layout.removeAllViews()
             roll.roller(seekDice.progress + 1)
         }
@@ -66,7 +73,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    override fun onResume() {
+        super.onResume()
+        shakeDetector.start()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        shakeDetector.stop()
+    }
     private fun resetDice(numberOfDice: Int) {
         layout.removeAllViews()
         roll.roller(numberOfDice)

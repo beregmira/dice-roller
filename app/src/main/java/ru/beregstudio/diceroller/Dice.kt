@@ -38,7 +38,6 @@ class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Con
 
     init {
         setDiceImage()
-        image.contentDescription = "Dice $diceRoll"
     }
 
     fun setDiceImage() {
@@ -47,6 +46,7 @@ class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Con
             2 -> image.setImageResource(getDiceSetTwoRandomImage())
             else -> image.setImageResource(getDiceSetThreeRandomImage())
         }
+        image.contentDescription = diceRoll.toString()
     }
 
     fun setDiceSize() {
