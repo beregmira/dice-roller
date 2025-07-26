@@ -14,14 +14,15 @@ const val DEFAULT_NUMBER_OF_DICE: Int = 1
 var diceset = 1
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var roll: Roll
+    private val layout: LinearLayout by lazy { findViewById(R.id.DiceLayout) }
+    private val rollNumber: TextView by lazy { findViewById(R.id.diceNumber) }
+    private val rollButton: Button by lazy { findViewById(R.id.diceButton) }
+    private val seekDice: SeekBar by lazy { findViewById(R.id.seekBar) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val layout: LinearLayout = findViewById(R.id.DiceLayout)
-        val rollNumber: TextView = findViewById(R.id.diceNumber)
-        val rollButton: Button = findViewById(R.id.diceButton)
-        val seekDice: SeekBar = findViewById(R.id.seekBar)
-        val roll = Roll(layout, rollNumber, this)
+        roll = Roll(layout, rollNumber, this)
         roll.roller(DEFAULT_NUMBER_OF_DICE)
         
         rollButton.setOnClickListener {
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun resetDice(numberOfDice: Int) {
+        layout.removeAllViews()
+        roll.roller(numberOfDice)
+    }
     /**
      * Событие при создании основного меню
      *
@@ -86,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             R.id.green -> 2
             else -> 3
         }
+        resetDice(seekDice.progress + 1)
         return super.onOptionsItemSelected(item)
     }
 

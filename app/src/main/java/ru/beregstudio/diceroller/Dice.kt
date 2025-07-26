@@ -5,7 +5,7 @@ import android.widget.ImageView
 import kotlin.random.Random
 
 
-class Dice(private val numSide: Int, private val diceset: Int, contextParam: Context) {
+class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Context) {
     var diceRoll = getRandomDice()
     var image = ImageView(contextParam)
 
@@ -38,15 +38,15 @@ class Dice(private val numSide: Int, private val diceset: Int, contextParam: Con
 
     init {
         setDiceImage()
+        image.contentDescription = "Dice $diceRoll"
     }
 
-    private fun setDiceImage() {
-        when (diceset) {
+    fun setDiceImage() {
+        when (diceSet) {
             1 -> image.setImageResource(getDiceSetOneRandomImage())
             2 -> image.setImageResource(getDiceSetTwoRandomImage())
             else -> image.setImageResource(getDiceSetThreeRandomImage())
         }
-        image.contentDescription = diceRoll.toString()
     }
 
     fun setDiceSize() {
