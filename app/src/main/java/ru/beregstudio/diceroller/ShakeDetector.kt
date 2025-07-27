@@ -7,7 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 
 class ShakeDetector(
-    private val context: Context,
+    context: Context,
     private val onShake: () -> Unit
 ) : SensorEventListener {
     private val sensorManager: SensorManager =
