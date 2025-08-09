@@ -69,11 +69,13 @@ class Roll(
     }
 
     /**
-     * Проигрывание звука броска кубика
+     * Plays dice roll sound.
      *
-     * Функция возвращает объект [MediaPlayer] c заданным треком.
-     * @return [MediaPlayer]
+     * Creates and returns a [MediaPlayer] instance with the specified sound track.
+     *
+     * @return [MediaPlayer] instance configured with the dice roll sound
      */
+
     private fun getDiceRollSound(): MediaPlayer {
         return MediaPlayer.create(contextParam, R.raw.igralnaya_kost_upala)
     }
