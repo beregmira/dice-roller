@@ -13,6 +13,23 @@ const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
 var diceSet = 1
 
+/**
+ * Main activity for the Dice Roller application.
+ *
+ * This class handles the main UI interactions including:
+ * - Rolling dice with button click or device shake
+ * - Adjusting number of dice with seek bar
+ * - Changing dice skin through options menu
+ * - Managing shake detection lifecycle
+ *
+ * @property roll The Roll instance that handles dice rolling logic
+ * @property layout The LinearLayout containing dice views
+ * @property rollNumber TextView showing the total rolled number
+ * @property rollButton Button to trigger dice roll
+ * @property seekDice SeekBar for selecting number of dice
+ * @property shakeDetector Detects device shake events to trigger dice rolls
+ */
+
 class MainActivity : AppCompatActivity() {
     private lateinit var roll: Roll
     private val layout: LinearLayout by lazy { findViewById(R.id.DiceLayout) }
@@ -26,45 +43,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         roll = Roll(layout, rollNumber, this)
         roll.roller(DEFAULT_NUMBER_OF_DICE)
-        
+
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roll.roller(seekDice.progress + 1)
         }
         seekDice.setOnSeekBarChangeListener(/* l = */ object : SeekBar.OnSeekBarChangeListener {
-            /**
-             * Событие изменения количества кубиков
-             *
-             * Использование переключателя для выбора количества кубиков пользователем от 1 до 3
-             * @param seekBar
-             */
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 layout.removeAllViews()
                 roll.roller(seekDice.progress + 1)
             }
-
-            /**
-             * Событие воспроизведение трека при старте
-             *
-             * Является обязательным для класса, но имплементация не требуется
-             * @param seekBar
-             */
             override fun onStartTrackingTouch(seekBar: SeekBar) {
-                /**
-                 * Событие не применяется
-                 */
             }
-
-            /**
-             * Событие при остановки воспроизведения
-             *
-             * Является обязательным для класса, но имплементация не требуется
-             * @param seekBar
-             */
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                /**
-                 * Событие не применяется
-                 */
             }
         })
         shakeDetector = ShakeDetector(this) {
@@ -86,19 +77,26 @@ class MainActivity : AppCompatActivity() {
         roll.roller(numberOfDice)
     }
     /**
-     * Событие при создании основного меню
+     * Handles the creation of main options menu.
+     * This is required when implementing main side menu in the application.
      *
-     * Является обязательным при добавлении основного бокового меню в приложении
+     * @param menu The options menu in which items are placed.
+     * @return Boolean indicating whether the menu was successfully created.
      */
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater.inflate(R.menu.main, menu)
         println(inflater.toString())
         return super.onCreateOptionsMenu(menu)
     }
     /**
-     * Событие при выборе элемента основного бокового меню
+     * Handles selection of items in the main side menu.
      *
-     * При выборе скина кубиков фиксируем значение в глобальной переменной diceset
+     * When a dice skin is selected, stores the selected value in the global variable [diceSet]
+     * and resets the dice with the current progress value.
+     *
+     * @param item The selected menu item
+     * @return Boolean indicating whether the selection was handled
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         diceSet = when (item.itemId) {
