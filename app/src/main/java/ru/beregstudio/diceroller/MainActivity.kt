@@ -8,6 +8,8 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+
 
 const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
@@ -41,9 +43,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        diceSet = getSharedPreferences("app_prefs", Context.MODE_PRIVATE).getInt("dice_set", 1)
         roll = Roll(layout, rollNumber, this)
         roll.roller(DEFAULT_NUMBER_OF_DICE)
-
         rollButton.setOnClickListener {
             layout.removeAllViews()
             roll.roller(seekDice.progress + 1)
@@ -53,8 +55,10 @@ class MainActivity : AppCompatActivity() {
                 layout.removeAllViews()
                 roll.roller(seekDice.progress + 1)
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
+
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
@@ -63,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             roll.roller(seekDice.progress + 1)
         }
     }
+
     override fun onResume() {
         super.onResume()
         shakeDetector.start()
@@ -72,10 +77,12 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         shakeDetector.stop()
     }
+
     private fun resetDice(numberOfDice: Int) {
         layout.removeAllViews()
         roll.roller(numberOfDice)
     }
+
     /**
      * Handles the creation of main options menu.
      * This is required when implementing main side menu in the application.
@@ -89,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         println(inflater.toString())
         return super.onCreateOptionsMenu(menu)
     }
+
     /**
      * Handles selection of items in the main side menu.
      *
@@ -104,8 +112,23 @@ class MainActivity : AppCompatActivity() {
             R.id.green -> 2
             else -> 3
         }
+        saveDiceSet(diceSet)
         resetDice(seekDice.progress + 1)
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * Saves the selected dice set to shared preferences.
+     *
+     * @param set The integer value representing the dice set to be saved.
+     */
+
+    private fun saveDiceSet(set: Int) {
+        val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPref.edit().apply {
+            putInt("dice_set", set)
+            apply()
+        }
     }
 
 }
