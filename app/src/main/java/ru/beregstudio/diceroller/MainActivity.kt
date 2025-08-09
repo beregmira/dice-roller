@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import android.content.Context
 
 
 const val SIX_SIDES: Int = 6
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        diceSet = getSharedPreferences("app_prefs", Context.MODE_PRIVATE).getInt("dice_set", 1)
+        diceSet = getSharedPreferences("app_prefs", MODE_PRIVATE).getInt("dice_set", 1)
         roll = Roll(layout, rollNumber, this)
         roll.roller(DEFAULT_NUMBER_OF_DICE)
         rollButton.setOnClickListener {
@@ -124,7 +123,7 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun saveDiceSet(set: Int) {
-        val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
         sharedPref.edit().apply {
             putInt("dice_set", set)
             apply()
