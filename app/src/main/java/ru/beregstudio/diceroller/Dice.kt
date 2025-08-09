@@ -5,6 +5,17 @@ import android.widget.ImageView
 import kotlin.random.Random
 
 
+/**
+ * Represents a dice with customizable sides and visual sets.
+ *
+ * @param numSide The number of sides on the dice.
+ * @param diceSet The visual set of dice images to use (1, 2, or 3).
+ * @param contextParam The context used to create the dice image view.
+ *
+ * @property diceRoll The current rolled value of the dice (1 to numSide).
+ * @property image The ImageView that displays the dice face.
+ */
+
 class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Context) {
     val diceRoll = getRandomDice()
     val image = ImageView(contextParam)

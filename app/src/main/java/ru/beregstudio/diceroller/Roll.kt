@@ -9,6 +9,14 @@ import android.widget.TextView
 import android.animation.AnimatorListenerAdapter
 import android.animation.Animator
 
+/**
+ * Represents a dice roll operation.
+ *
+ * @param layout The layout where dice images will be added.
+ * @param rollNumber The TextView that displays the sum of dice rolls.
+ * @param contextParam The context used for creating dice and media player.
+ */
+
 class Roll(
     private val layout: LinearLayout, private val rollNumber: TextView,
     private val contextParam: Context
