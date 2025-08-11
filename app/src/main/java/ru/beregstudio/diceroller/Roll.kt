@@ -9,6 +9,14 @@ import android.widget.TextView
 import android.animation.AnimatorListenerAdapter
 import android.animation.Animator
 
+/**
+ * Represents a dice roll operation.
+ *
+ * @param layout The layout where dice images will be added.
+ * @param rollNumber The TextView that displays the sum of dice rolls.
+ * @param contextParam The context used for creating dice and media player.
+ */
+
 class Roll(
     private val layout: LinearLayout, private val rollNumber: TextView,
     private val contextParam: Context
@@ -57,15 +65,17 @@ class Roll(
     }
 
     private fun getDice(): Dice {
-        return Dice(SIX_SIDES, diceset, contextParam)
+        return Dice(SIX_SIDES, diceSet, contextParam)
     }
 
     /**
-     * Проигрывание звука броска кубика
+     * Plays dice roll sound.
      *
-     * Функция возвращает объект [MediaPlayer] c заданным треком.
-     * @return [MediaPlayer]
+     * Creates and returns a [MediaPlayer] instance with the specified sound track.
+     *
+     * @return [MediaPlayer] instance configured with the dice roll sound
      */
+
     private fun getDiceRollSound(): MediaPlayer {
         return MediaPlayer.create(contextParam, R.raw.igralnaya_kost_upala)
     }

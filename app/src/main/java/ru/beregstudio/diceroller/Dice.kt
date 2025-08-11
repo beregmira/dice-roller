@@ -5,48 +5,56 @@ import android.widget.ImageView
 import kotlin.random.Random
 
 
+/**
+ * Represents a dice with customizable sides and visual sets.
+ *
+ * @param numSide The number of sides on the dice.
+ * @param diceSet The visual set of dice images to use (1, 2, or 3).
+ * @param contextParam The context used to create the dice image view.
+ *
+ * @property diceRoll The current rolled value of the dice (1 to numSide).
+ * @property image The ImageView that displays the dice face.
+ */
+
 class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Context) {
-    var diceRoll = getRandomDice()
-    var image = ImageView(contextParam)
+    val diceRoll = getRandomDice()
+    val image = ImageView(contextParam)
 
-    private fun getDiceSetOneRandomImage(): Int = when (diceRoll) {
-        1 -> R.drawable.set_1_dice_1
-        2 -> R.drawable.set_1_dice_2
-        3 -> R.drawable.set_1_dice_3
-        4 -> R.drawable.set_1_dice_4
-        5 -> R.drawable.set_1_dice_5
-        else -> R.drawable.set_1_dice_6
-    }
-
-    private fun getDiceSetTwoRandomImage(): Int = when (diceRoll) {
-        1 -> R.drawable.set_2_dice_1
-        2 -> R.drawable.set_2_dice_2
-        3 -> R.drawable.set_2_dice_3
-        4 -> R.drawable.set_2_dice_4
-        5 -> R.drawable.set_2_dice_5
-        else -> R.drawable.set_2_dice_6
-    }
-
-    private fun getDiceSetThreeRandomImage(): Int = when (diceRoll) {
-        1 -> R.drawable.set_3_dice_1
-        2 -> R.drawable.set_3_dice_2
-        3 -> R.drawable.set_3_dice_3
-        4 -> R.drawable.set_3_dice_4
-        5 -> R.drawable.set_3_dice_5
-        else -> R.drawable.set_3_dice_6
-    }
+    private val diceResources = mapOf(
+        1 to listOf(
+            R.drawable.set_1_dice_1,
+            R.drawable.set_1_dice_2,
+            R.drawable.set_1_dice_3,
+            R.drawable.set_1_dice_4,
+            R.drawable.set_1_dice_5,
+            R.drawable.set_1_dice_6
+        ),
+        2 to listOf(
+            R.drawable.set_2_dice_1,
+            R.drawable.set_2_dice_2,
+            R.drawable.set_2_dice_3,
+            R.drawable.set_2_dice_4,
+            R.drawable.set_2_dice_5,
+            R.drawable.set_2_dice_6
+        ),
+        3 to listOf(
+            R.drawable.set_3_dice_1,
+            R.drawable.set_3_dice_2,
+            R.drawable.set_3_dice_3,
+            R.drawable.set_3_dice_4,
+            R.drawable.set_3_dice_5,
+            R.drawable.set_3_dice_6
+        )
+    )
 
     init {
         setDiceImage()
-        image.contentDescription = "Dice $diceRoll"
     }
 
     fun setDiceImage() {
-        when (diceSet) {
-            1 -> image.setImageResource(getDiceSetOneRandomImage())
-            2 -> image.setImageResource(getDiceSetTwoRandomImage())
-            else -> image.setImageResource(getDiceSetThreeRandomImage())
-        }
+        val resources = diceResources[diceSet] ?: return
+        image.setImageResource(resources[diceRoll - 1])
+        image.contentDescription = diceRoll.toString()
     }
 
     fun setDiceSize() {
