@@ -109,7 +109,8 @@ class MainActivity : AppCompatActivity() {
         diceSet = when (item.itemId) {
             R.id.red -> 1
             R.id.green -> 2
-            else -> 3
+            R.id.dark -> 3
+            else -> 4
         }
         saveDiceSet(diceSet)
         resetDice(seekDice.progress + 1)

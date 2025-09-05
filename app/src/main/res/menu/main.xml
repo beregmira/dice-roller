@@ -14,4 +14,8 @@
         android:id="@+id/dark"
         android:icon="@drawable/set_3_dice_1"
         android:title="@string/darktheme" />
+    <item
+        android:id="@+id/sakura"
+        android:icon="@drawable/set_4_dice_1"
+        android:title="@string/sakuratheme" />
 </menu>
