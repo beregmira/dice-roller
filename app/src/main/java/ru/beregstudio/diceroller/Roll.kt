@@ -22,7 +22,7 @@ class Roll(
     private val contextParam: Context
 ) {
     fun roller(numOfDice: Int) {
-        val diceRun = arrayListOf<Dice>()
+        val diceRun = mutableListOf<Dice>()
         val play = getDiceRollSound()
         play.start()
 
@@ -38,7 +38,6 @@ class Roll(
         }
         rollNumber.text = sum.toString()
         play.setOnCompletionListener {
-            play.reset()
             play.release()
         }
         diceRun.clear()
@@ -55,13 +54,11 @@ class Roll(
             repeatCount = 1
             repeatMode = ObjectAnimator.REVERSE
             startDelay = 0
-
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     dice.setDiceImage()
                 }
             })
-
             start()
         }
     }
