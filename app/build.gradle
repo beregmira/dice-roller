@@ -1,7 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -36,8 +34,8 @@ android {
         targetCompatibility JavaVersion.VERSION_21
     }
     namespace 'ru.beregstudio.diceroller'
-    compileSdkVersion 36
-    buildToolsVersion '35.0.0'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
 }
 
 dependencies {
