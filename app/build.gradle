@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
-        targetSdk 36
+        targetSdk 37
         versionCode 27
         versionName '1.27'
 
