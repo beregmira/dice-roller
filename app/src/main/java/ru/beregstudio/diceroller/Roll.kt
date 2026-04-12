@@ -22,46 +22,45 @@ class Roll(
     private val contextParam: Context
 ) {
     fun roller(numOfDice: Int) {
-        val diceRun = arrayListOf<Dice>()
-        var sum = 0
+        val diceRun = mutableListOf<Dice>()
         val play = getDiceRollSound()
         play.start()
-        (1..numOfDice).forEach { _ ->
+
+        repeat(numOfDice) {
             diceRun.add(getDice())
         }
-        for (dice in diceRun) {
+        val sum = diceRun.sumOf { it.diceRoll }
+
+        diceRun.forEachIndexed { _, dice ->
             layout.addView(dice.image)
-            rollNumber.text = dice.diceRoll.toString()
-            sum += dice.diceRoll
-            rollNumber.text = sum.toString()
             dice.setDiceSize()
-
-            val duration = (300..600).random().toLong()
-            val endRotation = (360..720).random().toFloat()
-
-            ObjectAnimator.ofFloat(dice.image, "rotation", 0f, endRotation).apply {
-                this.duration = duration
-                interpolator = AccelerateDecelerateInterpolator()
-                repeatCount = 1
-                repeatMode = ObjectAnimator.REVERSE
-                this.startDelay = 0
-
-                addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        dice.setDiceImage()
-                    }
-                })
-
-                start()
-
-            }
+            animateDice(dice)
         }
+        rollNumber.text = sum.toString()
         play.setOnCompletionListener {
-            play.reset()
             play.release()
         }
         diceRun.clear()
 
+    }
+
+    private fun animateDice(dice: Dice) {
+        val duration = (300..600).random().toLong()
+        val endRotation = (360..720).random().toFloat()
+
+        ObjectAnimator.ofFloat(dice.image, "rotation", 0f, endRotation).apply {
+            this.duration = duration
+            interpolator = AccelerateDecelerateInterpolator()
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+            startDelay = 0
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    dice.setDiceImage()
+                }
+            })
+            start()
+        }
     }
 
     private fun getDice(): Dice {
@@ -71,7 +70,7 @@ class Roll(
     /**
      * Plays dice roll sound.
      *
-     * Creates and returns a [MediaPlayer] instance with the specified sound track.
+     * Creates and returns a [MediaPlayer] instance with the specified soundtrack.
      *
      * @return [MediaPlayer] instance configured with the dice roll sound
      */

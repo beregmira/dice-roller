@@ -14,8 +14,8 @@ android {
         applicationId "ru.beregstudio.diceroller"
         minSdkVersion 22
         targetSdk 36
-        versionCode 25
-        versionName '1.25'
+        versionCode 27
+        versionName '1.27'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,17 +35,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    kotlinOptions {
-
-    }
     namespace 'ru.beregstudio.diceroller'
-    compileSdk 36
+    compileSdkVersion 36
+    buildToolsVersion '35.0.0'
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
 }
