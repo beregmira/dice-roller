@@ -18,4 +18,12 @@
         android:id="@+id/sakura"
         android:icon="@drawable/set_4_dice_1"
         android:title="@string/sakuratheme" />
+    <item
+        android:id="@+id/snakes"
+        android:icon="@drawable/set_5_dice_1"
+        android:title="@string/snakestheme" />
+    <item
+        android:id="@+id/monsters"
+        android:icon="@drawable/set_6_dice_1"
+        android:title="@string/monsterstheme" />
 </menu>

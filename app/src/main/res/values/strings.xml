@@ -5,4 +5,6 @@
     <string name="greentheme">Green</string>
     <string name="darktheme">Dark</string>
     <string name="sakuratheme">Sakura</string>
+    <string name="snakestheme">Snakes</string>
+    <string name="monsterstheme">Monsters</string>
 </resources>
