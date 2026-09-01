@@ -6,4 +6,6 @@
     <string name="greentheme">Зеленые</string>
     <string name="darktheme">Темные</string>
     <string name="sakuratheme">Сакура</string>
+    <string name="snakestheme">Змейки</string>
+    <string name="monsterstheme">Монстры</string>
 </resources>

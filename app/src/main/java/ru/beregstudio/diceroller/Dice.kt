@@ -52,6 +52,22 @@ class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Con
             R.drawable.set_4_dice_4,
             R.drawable.set_4_dice_5,
             R.drawable.set_4_dice_6
+        ),
+        5 to listOf(
+            R.drawable.set_5_dice_1,
+            R.drawable.set_5_dice_2,
+            R.drawable.set_5_dice_3,
+            R.drawable.set_5_dice_4,
+            R.drawable.set_5_dice_5,
+            R.drawable.set_5_dice_6
+        ),
+        6 to listOf(
+            R.drawable.set_6_dice_1,
+            R.drawable.set_6_dice_2,
+            R.drawable.set_6_dice_3,
+            R.drawable.set_6_dice_4,
+            R.drawable.set_6_dice_5,
+            R.drawable.set_6_dice_6
         )
     )
 

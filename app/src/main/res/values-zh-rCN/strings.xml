@@ -6,4 +6,6 @@
     <string name="greentheme">绿色</string>
     <string name="darktheme">黑暗</string>
     <string name="sakuratheme">樱花</string>
+    <string name="snakestheme">蛇类</string>
+    <string name="monsterstheme">怪物</string>
 </resources>
