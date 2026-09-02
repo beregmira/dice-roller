@@ -14,9 +14,9 @@ import kotlin.random.Random
  *
  * @property diceRoll The current rolled value of the dice (1 to numSide).
  * @property image The ImageView that displays the dice face.
+ * @property diceSet The index of the dice set (e.g., 1-6).
  */
-
-class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Context) {
+class Dice(private val numSide: Int, val diceSet: Int, contextParam: Context) {
     val diceRoll = getRandomDice()
     val image = ImageView(contextParam)
 
@@ -79,6 +79,16 @@ class Dice(private val numSide: Int, private val diceSet: Int, contextParam: Con
         val resources = diceResources[diceSet] ?: return
         image.setImageResource(resources[diceRoll - 1])
         image.contentDescription = diceRoll.toString()
+    }
+
+    /**
+     * Returns the resource ID of the current dice face image.
+     *
+     * @return The resource ID.
+     */
+    fun getImageResourceId(): Int {
+        val resources = diceResources[diceSet] ?: return 0
+        return resources[diceRoll - 1]
     }
 
     fun setDiceSize() {
