@@ -2,6 +2,7 @@ package ru.beregstudio.diceroller
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.LinearLayout
@@ -35,6 +36,14 @@ class Roll(
             layout.addView(dice.image)
             dice.setDiceSize()
             animateDice(dice)
+            
+            // Add click listener to show detail view
+            dice.image.setOnClickListener {
+                val intent = Intent(contextParam, DiceDetailActivity::class.java).apply {
+                    putExtra("EXTRA_IMAGE_RES_ID", dice.getImageResourceId())
+                }
+                contextParam.startActivity(intent)
+            }
         }
         rollNumber.text = sum.toString()
         play.setOnCompletionListener {
