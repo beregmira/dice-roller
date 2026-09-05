@@ -18,7 +18,7 @@ import kotlin.random.Random
 class Dice(
     private val numSide: Int,
     val diceSet: Int,
-    private val contextParam: Context
+    private val contextParam: Context,
 ) {
     val diceRoll = getRandomDice()
     val image = ImageView(contextParam)
@@ -56,7 +56,7 @@ class Dice(
      * Example: set_1_dice_3 refers to the 3rd face of the 1st skin.
      */
     private fun getDrawableResId(face: Int): Int {
-        val resName = "set_${diceSet}_dice_${face}"
+        val resName = "set_${diceSet}_dice_$face"
         return contextParam.resources.getIdentifier(resName, "drawable", contextParam.packageName)
     }
 }
