@@ -3,27 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/red"
-        android:icon="@drawable/set_1_dice_1"
         android:title="@string/redtheme"
-        app:showAsAction="collapseActionView" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/green"
-        android:icon="@drawable/set_2_dice_1"
-        android:title="@string/greentheme" />
+        android:title="@string/greentheme"
+        app:showAsAction="never" />
     <item
         android:id="@+id/dark"
-        android:icon="@drawable/set_3_dice_1"
-        android:title="@string/darktheme" />
+        android:title="@string/darktheme"
+        app:showAsAction="never" />
     <item
         android:id="@+id/sakura"
-        android:icon="@drawable/set_4_dice_1"
-        android:title="@string/sakuratheme" />
+        android:title="@string/sakuratheme"
+        app:showAsAction="never" />
     <item
         android:id="@+id/snakes"
-        android:icon="@drawable/set_5_dice_1"
-        android:title="@string/snakestheme" />
+        android:title="@string/snakestheme"
+        app:showAsAction="never" />
     <item
         android:id="@+id/monsters"
-        android:icon="@drawable/set_6_dice_1"
-        android:title="@string/monsterstheme" />
+        android:title="@string/monsterstheme"
+        app:showAsAction="never" />
 </menu>

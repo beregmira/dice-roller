@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Handles the creation of main options menu.
+     * Handles the creation of main option's menu.
      * This is required when implementing main side menu in the application.
      *
      * @param menu The options menu in which items are placed.

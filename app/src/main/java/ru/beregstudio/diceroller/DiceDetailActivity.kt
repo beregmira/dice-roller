@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
  * Activity for displaying a detailed view of a specific dice.
  *
  * This class allows the user to see a large version of a dice image
- * and interact with it using multi-touch gestures for zooming.
+ * and interact with it using multitouch gestures for zooming.
  */
 class DiceDetailActivity : AppCompatActivity() {
     private lateinit var detailImageView: ZoomableImageView
