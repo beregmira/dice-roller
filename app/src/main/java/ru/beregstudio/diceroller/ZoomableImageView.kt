@@ -49,7 +49,5 @@ class ZoomableImageView @JvmOverloads constructor(
         return true
     }
 
-    override fun performClick(): Boolean {
-        return super.performClick()
-    }
+    override fun performClick(): Boolean = super.performClick()
 }
