@@ -18,7 +18,7 @@ import kotlin.random.Random
 class Dice(
     private val numSide: Int,
     val diceSet: Int,
-    private val contextParam: Context,
+    private val contextParam: Context
 ) {
     val diceRoll = getRandomDice()
     val image = ImageView(contextParam)
@@ -50,13 +50,24 @@ class Dice(
 
     /**
      * Gets the drawable resource ID for the current roll value.
-     * Uses `context.resources.getIdentifier()` for dynamic resource resolution.
      * 
-     * The image names follow the pattern: set_{diceSet}_dice_{face}
-     * Example: set_1_dice_3 refers to the 3rd face of the 1st skin.
+     * Uses a pre-defined map of resources to avoid dynamic resource lookups.
+     *
+     * @return The resource ID.
      */
     private fun getDrawableResId(face: Int): Int {
-        val resName = "set_${diceSet}_dice_$face"
-        return contextParam.resources.getIdentifier(resName, "drawable", contextParam.packageName)
+        val skinIds = diceSkins[diceSet] ?: return 0
+        return skinIds[face - 1]
+    }
+
+    companion object {
+        private val diceSkins: Map<Int, List<Int>> = mapOf(
+            1 to listOf(R.drawable.set_1_dice_1, R.drawable.set_1_dice_2, R.drawable.set_1_dice_3, R.drawable.set_1_dice_4, R.drawable.set_1_dice_5, R.drawable.set_1_dice_6),
+            2 to listOf(R.drawable.set_2_dice_1, R.drawable.set_2_dice_2, R.drawable.set_2_dice_3, R.drawable.set_2_dice_4, R.drawable.set_2_dice_5, R.drawable.set_2_dice_6),
+            3 to listOf(R.drawable.set_3_dice_1, R.drawable.set_3_dice_2, R.drawable.set_3_dice_3, R.drawable.set_3_dice_4, R.drawable.set_3_dice_5, R.drawable.set_3_dice_6),
+            4 to listOf(R.drawable.set_4_dice_1, R.drawable.set_4_dice_2, R.drawable.set_4_dice_3, R.drawable.set_4_dice_4, R.drawable.set_4_dice_5, R.drawable.set_4_dice_6),
+            5 to listOf(R.drawable.set_5_dice_1, R.drawable.set_5_dice_2, R.drawable.set_5_dice_3, R.drawable.set_5_dice_4, R.drawable.set_5_dice_5, R.drawable.set_5_dice_6),
+            6 to listOf(R.drawable.set_6_dice_1, R.drawable.set_6_dice_2, R.drawable.set_6_dice_3, R.drawable.set_6_dice_4, R.drawable.set_6_dice_5, R.drawable.set_6_dice_6)
+        )
     }
 }
