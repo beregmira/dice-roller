@@ -4,4 +4,3 @@
 
 ## Скачать и установить: ##
 * RuStore: https://apps.rustore.ru/app/ru.beregstudio.diceroller
-* Google Play: https://play.google.com/store/apps/details?id=ru.beregstudio.diceroller
