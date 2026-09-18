@@ -69,7 +69,7 @@ class DiceDetailActivity : AppCompatActivity() {
             } catch (error: Exception) {
                 Log.e(LOG_TAG, "RuStore init failed: ${error.message}", error)
             }
-        }, 5000)
+        }, 3000)
     }
 
     private fun hasAlreadyReviewed(): Boolean = sharedPref.getBoolean(PREF_KEY_HAS_REVIEWS, false)
