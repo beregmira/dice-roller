@@ -6,7 +6,9 @@ import android.os.Handler
 import android.util.Log
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import ru.rustore.sdk.review.RuStoreReviewManagerFactory
+import ru.rustore.sdk.review.errors.RuStoreReviewExists
 import androidx.core.content.edit
 
 /**
@@ -51,7 +53,8 @@ class DiceDetailActivity : AppCompatActivity() {
 
     private fun showReviewFormAfterDelay() {
         if (hasAlreadyReviewed()) {
-            Log.d(LOG_TAG, "User already reviewed, skipping")
+            Log.d(LOG_TAG, "User already reviewed, showing thank you message")
+            Toast.makeText(this, getString(R.string.review_thanks), Toast.LENGTH_LONG).show()
             return
         }
         Handler(Looper.getMainLooper()).postDelayed({
@@ -65,6 +68,11 @@ class DiceDetailActivity : AppCompatActivity() {
                     }
                 }.addOnFailureListener { error ->
                     Log.e(LOG_TAG, "RuStore flow failed: ${error.message}", error)
+                    if (error is RuStoreReviewExists) {
+                        Log.d(LOG_TAG, "User already reviewed in RuStore, showing thank you message")
+                        markAsReviewed()
+                        Toast.makeText(this, getString(R.string.review_thanks), Toast.LENGTH_LONG).show()
+                    }
                 }
             } catch (error: Exception) {
                 Log.e(LOG_TAG, "RuStore init failed: ${error.message}", error)
