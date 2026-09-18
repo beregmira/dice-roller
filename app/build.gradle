@@ -46,5 +46,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
     
     // RuStore Reviews & Ratings SDK
-    implementation 'ru.rustore.sdk:review:7.0.0'
+    implementation 'ru.rustore.sdk:review:10.5.1'
 }
