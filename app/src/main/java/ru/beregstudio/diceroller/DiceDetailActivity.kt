@@ -1,7 +1,15 @@
 package ru.beregstudio.diceroller
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
+import ru.rustore.sdk.review.RuStoreReviewManagerFactory
+import ru.rustore.sdk.review.errors.RuStoreReviewExists
+import androidx.core.content.edit
 
 /**
  * Activity for displaying a detailed view of a specific dice.
@@ -11,10 +19,18 @@ import androidx.appcompat.app.AppCompatActivity
  */
 class DiceDetailActivity : AppCompatActivity() {
     private lateinit var detailImageView: ZoomableImageView
+    private lateinit var sharedPref: SharedPreferences
+
+    companion object {
+        private const val LOG_TAG = "DiceRuStore"
+        private const val PREF_KEY_HAS_REVIEWS = "has_reviewed"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_detail)
+
+        sharedPref = getSharedPreferences("ru.beregstudio.diceroller prefs", MODE_PRIVATE)
 
         // Now using the custom view that handles everything correctly
         detailImageView = findViewById(R.id.detailImageView)
@@ -30,5 +46,44 @@ class DiceDetailActivity : AppCompatActivity() {
         detailImageView.setOnClickListener {
             finish() // Close activity
         }
+
+        // Show review form after 5 seconds
+        showReviewFormAfterDelay()
+    }
+
+    private fun showReviewFormAfterDelay() {
+        if (hasAlreadyReviewed()) {
+            Log.d(LOG_TAG, "User already reviewed, showing thank you message")
+            Toast.makeText(this, getString(R.string.review_thanks), Toast.LENGTH_LONG).show()
+            return
+        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            Log.d(LOG_TAG, "RuStore worker started")
+            try {
+                val manager = RuStoreReviewManagerFactory.create(applicationContext)
+                manager.requestReviewFlow().addOnSuccessListener { reviewInfo ->
+                    Log.d(LOG_TAG, "RuStore form ready, launching form")
+                    manager.launchReviewFlow(reviewInfo).addOnSuccessListener {
+                        markAsReviewed()
+                    }
+                }.addOnFailureListener { error ->
+                    Log.e(LOG_TAG, "RuStore flow failed: ${error.message}", error)
+                    if (error is RuStoreReviewExists) {
+                        Log.d(LOG_TAG, "User already reviewed in RuStore, showing thank you message")
+                        markAsReviewed()
+                        Toast.makeText(this, getString(R.string.review_thanks), Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (error: Exception) {
+                Log.e(LOG_TAG, "RuStore init failed: ${error.message}", error)
+            }
+        }, 3000)
+    }
+
+    private fun hasAlreadyReviewed(): Boolean = sharedPref.getBoolean(PREF_KEY_HAS_REVIEWS, false)
+
+    private fun markAsReviewed() {
+        sharedPref.edit { putBoolean(PREF_KEY_HAS_REVIEWS, true) }
+        Log.d(LOG_TAG, "Marked as reviewed")
     }
 }
