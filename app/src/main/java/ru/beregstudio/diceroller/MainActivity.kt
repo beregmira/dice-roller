@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
-const val SIX_SIDES: Int = 6
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
 var diceSet = 1
 
@@ -39,31 +38,56 @@ class MainActivity : AppCompatActivity() {
     private val seekDice: SeekBar by lazy { findViewById(R.id.seekBar) }
 
     private lateinit var shakeDetector: ShakeDetector
+    private val diceRoller = ru.beregstudio.diceroller.domain.DiceRoller()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         diceSet = getSharedPreferences("app_prefs", MODE_PRIVATE).getInt("dice_set", 1)
-        roll = Roll(layout, rollNumber, this)
-        roll.roller(DEFAULT_NUMBER_OF_DICE)
+        roll = Roll(layout, rollNumber, this, diceRoller)
+        performRoll(DEFAULT_NUMBER_OF_DICE)
+
         rollButton.setOnClickListener {
-            layout.removeAllViews()
-            roll.roller(seekDice.progress + 1)
+            performRoll(seekDice.progress + 1)
         }
-        seekDice.setOnSeekBarChangeListener(/* l = */ object : SeekBar.OnSeekBarChangeListener {
+
+        seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                layout.removeAllViews()
-                roll.roller(seekDice.progress + 1)
+                updateDicePreview(i + 1)
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
+
         shakeDetector = ShakeDetector(this) {
-            layout.removeAllViews()
-            roll.roller(seekDice.progress + 1)
+            performRoll(seekDice.progress + 1)
+        }
+    }
+
+    private fun performRoll(numberOfDice: Int) {
+        if (!rollButton.isEnabled) return
+
+        rollNumber.text = ""
+        layout.removeAllViews()
+        roll.roller(
+            numberOfDice,
+            onStart = {
+                rollButton.isEnabled = false
+            },
+            onFinish = {
+                rollButton.isEnabled = true
+                window.decorView.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+            }
+        )
+    }
+
+    private fun updateDicePreview(count: Int) {
+        layout.removeAllViews()
+        repeat(count) {
+            val dice = Dice(1, diceSet, this)
+            layout.addView(dice.image)
+            dice.setDiceSize()
         }
     }
 
@@ -79,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetDice(numberOfDice: Int) {
         layout.removeAllViews()
-        roll.roller(numberOfDice)
+        roll.roller(numberOfDice, onStart = {}, onFinish = {})
     }
 
     /**
@@ -91,18 +115,16 @@ class MainActivity : AppCompatActivity() {
      */
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater.inflate(R.menu.main, menu)
-        println(inflater.toString())
+        menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     /**
      * Handles selection of items in the main side menu.
-     *
      * When a dice skin is selected, stores the selected value in the global variable [diceSet]
      * and resets the dice with the current progress value.
      *
-     * @param item The selected menu item
+     * @param item The menu item to select
      * @return Boolean indicating whether the selection was handled
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -122,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Saves the selected dice set to shared preferences.
      *
-     * @param set The integer value representing the dice set to be saved.
+     * @param set The set of dice to save.
      */
 
     private fun saveDiceSet(set: Int) {
