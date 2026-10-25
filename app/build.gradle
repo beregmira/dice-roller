@@ -47,4 +47,7 @@ dependencies {
     
     // RuStore Reviews & Ratings SDK
     implementation 'ru.rustore.sdk:review:10.5.1'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
 }
