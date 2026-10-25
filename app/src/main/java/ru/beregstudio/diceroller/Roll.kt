@@ -16,26 +16,32 @@ import android.animation.Animator
  * @param layout The layout where dice images will be added.
  * @param rollNumber The TextView that displays the sum of dice rolls.
  * @param contextParam The context used for creating dice and media player.
+ * @param diceRoller The domain component for rolling dice.
  */
 
 class Roll(
-    private val layout: LinearLayout, private val rollNumber: TextView,
-    private val contextParam: Context
+    private val layout: LinearLayout,
+    private val rollNumber: TextView,
+    private val contextParam: Context,
+    private val diceRoller: ru.beregstudio.diceroller.domain.DiceRoller,
 ) {
-    fun roller(numOfDice: Int) {
-        val diceRun = mutableListOf<Dice>()
+    fun roller(numOfDice: Int, onStart: () -> Unit, onFinish: () -> Unit) {
+        val results = List(numOfDice) { diceRoller.roll(6) }
+        val sum = results.sum()
+
+        onStart()
+
         val play = getDiceRollSound()
         play.start()
 
-        repeat(numOfDice) {
-            diceRun.add(getDice())
-        }
-        val sum = diceRun.sumOf { it.diceRoll }
+        var completedAnimations = 0
 
-        diceRun.forEachIndexed { _, dice ->
+        for (i in 0 until numOfDice) {
+            val result = results[i]
+            val dice = Dice(result, diceSet, contextParam)
+            
             layout.addView(dice.image)
             dice.setDiceSize()
-            animateDice(dice)
             
             // Add click listener to show detail view
             dice.image.setOnClickListener {
@@ -44,16 +50,19 @@ class Roll(
                 }
                 contextParam.startActivity(intent)
             }
-        }
-        rollNumber.text = sum.toString()
-        play.setOnCompletionListener {
-            play.release()
-        }
-        diceRun.clear()
 
+            animateDice(dice) {
+                completedAnimations++
+                if (completedAnimations == numOfDice) {
+                    rollNumber.text = sum.toString()
+                    play.setOnCompletionListener { it.release() }
+                    onFinish()
+                }
+            }
+        }
     }
 
-    private fun animateDice(dice: Dice) {
+    private fun animateDice(dice: Dice, onFinished: () -> Unit) {
         val duration = (300..600).random().toLong()
         val endRotation = (360..720).random().toFloat()
 
@@ -66,23 +75,12 @@ class Roll(
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     dice.setDiceImage()
+                    onFinished()
                 }
             })
             start()
         }
     }
-
-    private fun getDice(): Dice {
-        return Dice(SIX_SIDES, diceSet, contextParam)
-    }
-
-    /**
-     * Plays dice roll sound.
-     *
-     * Creates and returns a [MediaPlayer] instance with the specified soundtrack.
-     *
-     * @return [MediaPlayer] instance configured with the dice roll sound
-     */
 
     private fun getDiceRollSound(): MediaPlayer {
         return MediaPlayer.create(contextParam, R.raw.igralnaya_kost_upala)

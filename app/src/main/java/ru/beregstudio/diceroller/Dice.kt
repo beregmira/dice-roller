@@ -7,20 +7,19 @@ import kotlin.random.Random
 /**
  * Represents a dice with customizable sides and visual sets.
  *
- * @param numSide The number of sides on the dice.
+ * @param faceValue The value shown on the face.
  * @param diceSet The visual set of dice images to use (1-6, etc.).
  * @param contextParam The context used to create the dice image view.
  *
- * @property diceRoll The current rolled value of the dice (1 to numSide).
+ * @property faceValue The current value of the dice.
  * @property image The ImageView that displays the dice face.
  * @property diceSet The index of the dice set (e.g., 1 for red, 2 for green, etc.).
  */
 class Dice(
-    private val numSide: Int,
+    val faceValue: Int,
     val diceSet: Int,
     private val contextParam: Context
 ) {
-    val diceRoll = getRandomDice()
     val image = ImageView(contextParam)
 
     init {
@@ -28,9 +27,9 @@ class Dice(
     }
 
     fun setDiceImage() {
-        val resId = getDrawableResId(diceRoll)
+        val resId = getDrawableResId(faceValue)
         image.setImageResource(resId)
-        image.contentDescription = diceRoll.toString()
+        image.contentDescription = faceValue.toString()
     }
 
     /**
@@ -38,14 +37,10 @@ class Dice(
      *
      * @return The resource ID.
      */
-    fun getImageResourceId(): Int = getDrawableResId(diceRoll)
+    fun getImageResourceId(): Int = getDrawableResId(faceValue)
 
     fun setDiceSize() {
         image.layoutParams.width = 350
-    }
-
-    private fun getRandomDice(): Int {
-        return Random.nextInt(numSide) + 1
     }
 
     /**
