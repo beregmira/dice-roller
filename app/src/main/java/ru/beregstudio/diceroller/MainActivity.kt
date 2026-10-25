@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         seekDice.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                updateDicePreview(i + 1)
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                updateDicePreview(progress + 1)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}

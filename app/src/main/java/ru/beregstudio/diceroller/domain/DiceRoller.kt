@@ -24,13 +24,13 @@ class DiceRoller(private val random: Random = Random.Default) {
  */
 data class RollResult(
     val value: Int,
-    val numSides: Int
+    val numSides: Int,
 )
 
 /**
  * Типы кубиков, которые будут поддерживаться в будущем (Фаза 2).
  */
-enum class DiceType(val sides: Int) {
-    D6(6),
-    D20(20); // Задел на будущее
-}
+//enum class DiceType(val sides: Int) {
+//    D6(6),
+//    D20(20); // Задел на будущее
+//}
