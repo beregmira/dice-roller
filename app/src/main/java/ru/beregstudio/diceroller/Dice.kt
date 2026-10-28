@@ -1,6 +1,7 @@
 package ru.beregstudio.diceroller
 
 import android.content.Context
+import android.util.TypedValue
 import android.widget.ImageView
 import kotlin.random.Random
 
@@ -40,7 +41,14 @@ class Dice(
     fun getImageResourceId(): Int = getDrawableResId(faceValue)
 
     fun setDiceSize() {
-        image.layoutParams.width = 350
+        val sizeInPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            120f,
+            contextParam.resources.displayMetrics
+        ).toInt()
+        image.layoutParams.width = sizeInPx
+        image.layoutParams.height = sizeInPx
+        image.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 
     /**

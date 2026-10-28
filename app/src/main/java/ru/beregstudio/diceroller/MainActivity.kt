@@ -3,11 +3,14 @@ package ru.beregstudio.diceroller
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.card.MaterialCardView
 
 
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private val rollNumber: TextView by lazy { findViewById(R.id.diceNumber) }
     private val rollButton: Button by lazy { findViewById(R.id.diceButton) }
     private val seekDice: SeekBar by lazy { findViewById(R.id.seekBar) }
+    private val resultCard: MaterialCardView by lazy { findViewById(R.id.resultCard) }
 
     private lateinit var shakeDetector: ShakeDetector
     private val diceRoller = ru.beregstudio.diceroller.domain.DiceRoller()
@@ -68,7 +72,12 @@ class MainActivity : AppCompatActivity() {
     private fun performRoll(numberOfDice: Int) {
         if (!rollButton.isEnabled) return
 
-        rollNumber.text = ""
+        // Подготовка к броску: скрываем старый результат (всю карточку!)
+        resultCard.visibility = View.INVISIBLE
+        resultCard.scaleX = 0.5f
+        resultCard.scaleY = 0.5f
+        resultCard.alpha = 0f
+
         layout.removeAllViews()
         roll.roller(
             numberOfDice,
@@ -78,8 +87,20 @@ class MainActivity : AppCompatActivity() {
             onFinish = {
                 rollButton.isEnabled = true
                 window.decorView.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+                animateResult() // Запускаем магию анимации для карточки!
             }
         )
+    }
+
+    private fun animateResult() {
+        resultCard.visibility = View.VISIBLE
+        resultCard.animate()
+            .scaleX(1.0f)
+            .scaleY(1.0f)
+            .alpha(1.0f)
+            .setDuration(500)
+            .setInterpolator(OvershootInterpolator())
+            .start()
     }
 
     private fun updateDicePreview(count: Int) {
