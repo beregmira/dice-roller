@@ -3,7 +3,6 @@ package ru.beregstudio.diceroller
 import android.content.Context
 import android.util.TypedValue
 import android.widget.ImageView
-import kotlin.random.Random
 
 /**
  * Represents a dice with customizable sides and visual sets.
