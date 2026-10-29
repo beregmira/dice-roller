@@ -22,10 +22,9 @@ android {
         release {
             minifyEnabled true
             shrinkResources = true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
         }
         debug {
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             debuggable true
         }
     }
@@ -35,16 +34,14 @@ android {
     }
     namespace 'ru.beregstudio.diceroller'
     compileSdk 37
-    buildToolsVersion '36.0.0'
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.8.0'
     implementation 'com.google.android.material:material:1.14.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
-    
+
     // RuStore Reviews & Ratings SDK
     implementation 'ru.rustore.sdk:review:10.5.1'
 

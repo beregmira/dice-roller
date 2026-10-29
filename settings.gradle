@@ -1,5 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://nexus-external.rustore.ru/repository/maven-rustore-exposed")
+        }
+    }
+}
+
 include ':app'
 rootProject.name = "Dice Roller"
