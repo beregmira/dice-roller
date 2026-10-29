@@ -1,6 +1,8 @@
 package ru.beregstudio.diceroller
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.HapticFeedbackConstants
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
+import ru.beregstudio.diceroller.domain.DiceRoller
 
 
 const val DEFAULT_NUMBER_OF_DICE: Int = 1
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private val resultCard: MaterialCardView by lazy { findViewById(R.id.resultCard) }
 
     private lateinit var shakeDetector: ShakeDetector
-    private val diceRoller = ru.beregstudio.diceroller.domain.DiceRoller()
+    private val diceRoller = DiceRoller()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,12 +84,13 @@ class MainActivity : AppCompatActivity() {
         layout.removeAllViews()
         roll.roller(
             numberOfDice,
+            diceSet,
             onStart = {
                 rollButton.isEnabled = false
             },
             onFinish = {
                 rollButton.isEnabled = true
-                window.decorView.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+                window.decorView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                 animateResult() // Запускаем магию анимации для карточки!
             }
         )
@@ -103,10 +107,21 @@ class MainActivity : AppCompatActivity() {
             .start()
     }
 
+    private var lastPreviewCount = -1
+
     private fun updateDicePreview(count: Int) {
+        if (count == lastPreviewCount) return
+        lastPreviewCount = count
+
         layout.removeAllViews()
         repeat(count) {
             val dice = Dice(1, diceSet, this)
+            dice.setOnClickListener {
+                val intent = Intent(this, DiceDetailActivity::class.java).apply {
+                    putExtra("EXTRA_IMAGE_RES_ID", dice.getImageResourceId())
+                }
+                startActivity(intent)
+            }
             layout.addView(dice.image)
             dice.setDiceSize()
         }
@@ -124,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetDice(numberOfDice: Int) {
         layout.removeAllViews()
-        roll.roller(numberOfDice, onStart = {}, onFinish = {})
+        roll.roller(numberOfDice, diceSet, onStart = {}, onFinish = {})
     }
 
     /**
