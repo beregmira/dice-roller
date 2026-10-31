@@ -25,4 +25,23 @@
         android:id="@+id/monsters"
         android:title="@string/monsterstheme"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_background"
+        android:title="@string/background_menu"
+        app:showAsAction="never">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/bg_auto"
+                    android:title="@string/bg_auto" />
+                <item
+                    android:id="@+id/bg_none"
+                    android:title="@string/bg_none" />
+                <item
+                    android:id="@+id/bg_halloween"
+                    android:title="@string/bg_halloween" />
+            </group>
+        </menu>
+    </item>
 </menu>

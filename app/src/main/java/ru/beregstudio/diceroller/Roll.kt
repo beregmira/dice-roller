@@ -18,14 +18,13 @@ import android.animation.Animator
  * @param contextParam The context used for creating dice and media player.
  * @param diceRoller The domain component for rolling dice.
  */
-
 class Roll(
     private val layout: LinearLayout,
     private val rollNumber: TextView,
     private val contextParam: Context,
     private val diceRoller: ru.beregstudio.diceroller.domain.DiceRoller,
 ) {
-    fun roller(numOfDice: Int, onStart: () -> Unit, onFinish: () -> Unit) {
+    fun roller(numOfDice: Int, diceSet: Int, onStart: () -> Unit, onFinish: () -> Unit) {
         val results = List(numOfDice) { diceRoller.roll(6) }
         val sum = results.sum()
 

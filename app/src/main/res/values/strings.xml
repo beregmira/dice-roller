@@ -8,4 +8,8 @@
     <string name="snakestheme">Snakes</string>
     <string name="monsterstheme">Monsters</string>
     <string name="review_thanks">Thank you for leaving a review!</string>
+    <string name="background_menu">Background</string>
+    <string name="bg_auto">Auto (holidays)</string>
+    <string name="bg_none">None</string>
+    <string name="bg_halloween">Halloween</string>
 </resources>

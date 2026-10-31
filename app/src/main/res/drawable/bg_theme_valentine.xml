@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!-- ЗАГЛУШКА тематического фона Valentine. Заменить на подготовленную графику. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640">
+
+    <path
+        android:fillColor="#3A0D1E"
+        android:pathData="M0,0h360v640h-360z" />
+    <path
+        android:fillColor="#FF5A7A"
+        android:pathData="M180,180 C150,140 100,150 100,200 C100,250 180,300 180,300 C180,300 260,250 260,200 C260,150 210,140 180,180 Z" />
+</vector>

@@ -9,4 +9,8 @@
     <string name="snakestheme">Змейки</string>
     <string name="monsterstheme">Монстры</string>
     <string name="review_thanks">Спасибо, что оставили отзыв!</string>
+    <string name="background_menu">Фон</string>
+    <string name="bg_auto">Авто (праздники)</string>
+    <string name="bg_none">Без фона</string>
+    <string name="bg_halloween">Хеллоуин</string>
 </resources>

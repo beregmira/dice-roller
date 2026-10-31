@@ -1,8 +1,9 @@
 package ru.beregstudio.diceroller
 
 import android.content.Context
+import android.util.TypedValue
 import android.widget.ImageView
-import kotlin.random.Random
+import android.view.View
 
 /**
  * Represents a dice with customizable sides and visual sets.
@@ -12,8 +13,8 @@ import kotlin.random.Random
  * @param contextParam The context used to create the dice image view.
  *
  * @property faceValue The current value of the dice.
- * @property image The ImageView that displays the dice face.
  * @property diceSet The index of the dice set (e.g., 1 for red, 2 for green, etc.).
+ * @property image The ImageView that displays the dice face.
  */
 class Dice(
     val faceValue: Int,
@@ -33,23 +34,32 @@ class Dice(
     }
 
     /**
-     * Returns the resource ID of the current dice face image.
+     * Returns the resource ID for the current dice face.
      *
-     * @return The resource ID.
+     * @return The resource ID of the current dice face.
      */
     fun getImageResourceId(): Int = getDrawableResId(faceValue)
 
     fun setDiceSize() {
-        image.layoutParams.width = 350
+        val sizeInPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            120f,
+            contextParam.resources.displayMetrics
+        ).toInt()
+        image.layoutParams.width = sizeInPx
+        image.layoutParams.height = sizeInPx
+        image.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 
     /**
-     * Gets the drawable resource ID for the current roll value.
-     * 
-     * Uses a pre-defined map of resources to avoid dynamic resource lookups.
+     * Sets a click listener for the dice image.
      *
-     * @return The resource ID.
+     * @param listener The click listener to attach.
      */
+    fun setOnClickListener(listener: View.OnClickListener) {
+        image.setOnClickListener(listener)
+    }
+
     private fun getDrawableResId(face: Int): Int {
         val skinIds = diceSkins[diceSet] ?: return 0
         return skinIds[face - 1]
