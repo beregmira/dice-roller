@@ -1,77 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/DiceLayout"
-        android:layout_width="0dp"
+    <!-- Слой тематического фона: масштабируется с обрезкой по краям. -->
+    <ImageView
+        android:id="@+id/bgImageView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="visible" />
+        android:contentDescription="@null"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop" />
+
+    <!-- Слой затемнения: включается только когда фон активен. -->
+    <View
+        android:id="@+id/bgScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_scrim"
+        android:visibility="gone" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/resultCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="?attr/colorPrimary"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="12dp">
+        <LinearLayout
+            android:id="@+id/DiceLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible" />
 
-            <TextView
-                android:id="@+id/diceNumber"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/resultCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:minWidth="70dp"
-                android:minHeight="35dp"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:paddingTop="7dp"
-                android:paddingBottom="7dp"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:text="0" />
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp">
 
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:max="2"
-            android:progress="0" />
+                <TextView
+                    android:id="@+id/diceNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minWidth="70dp"
+                    android:minHeight="35dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="0" />
+            </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/debugProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="debugProgressBar" />
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:max="2"
+                android:progress="0" />
 
-        <Button
-            android:id="@+id/diceButton"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="@string/roll" />
+            <TextView
+                android:id="@+id/debugProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="debugProgressBar" />
+
+            <Button
+                android:id="@+id/diceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="@string/roll" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

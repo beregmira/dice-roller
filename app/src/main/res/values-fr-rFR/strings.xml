@@ -8,4 +8,8 @@
     <string name="sakuratheme">Sakura</string>
     <string name="snakestheme">Serpents</string>
     <string name="monsterstheme">Monstres</string>
+    <string name="background_menu">Arrière-plan</string>
+    <string name="bg_auto">Auto (fêtes)</string>
+    <string name="bg_none">Aucun</string>
+    <string name="bg_halloween">Halloween</string>
 </resources>

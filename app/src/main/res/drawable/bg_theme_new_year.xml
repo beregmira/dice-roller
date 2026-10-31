@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!-- ЗАГЛУШКА тематического фона New Year. Заменить на подготовленную графику. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640">
+
+    <path
+        android:fillColor="#0B1A33"
+        android:pathData="M0,0h360v640h-360z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,90 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z M150,160 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z M270,70 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z M310,240 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z M40,300 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z" />
+</vector>
